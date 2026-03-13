@@ -1,0 +1,9 @@
+data/raw_shots/
+data/frames/
+data/embeddings/
+venv/
+.venv/
+outputs/
+__pycache__/
+*.pyc
+.DS_Store

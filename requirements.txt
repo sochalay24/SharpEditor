@@ -1,0 +1,13 @@
+torch
+torchvision
+opencv-python
+numpy
+pandas
+scikit-learn
+hdbscan
+transformers
+facenet-pytorch
+faiss-cpu
+tqdm
+moviepy
+PyYAML
