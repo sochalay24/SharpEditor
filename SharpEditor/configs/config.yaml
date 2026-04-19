@@ -1,0 +1,79 @@
+frame_sampling_rate_fps: 2
+max_frames_per_shot: 30
+frame_resize:
+  enabled: true
+  width: 640
+  height: 360
+image_format: jpg
+jpg_quality: 92
+keyframes:
+  enabled: true
+  max_keyframes: 12
+  min_scene_change_score: 0.25
+
+face_detection:
+  # 'keyframes' | 'sampled' | 'both'
+  frame_source: sampled
+  image_size: 160
+  margin: 40
+  min_face_size: 20
+  thresholds: [0.6, 0.7, 0.7]
+  factor: 0.709
+  keep_all: true
+  postprocess: true
+  device: auto
+  # Minimum detection confidence to keep a face
+  min_score: 0.7
+  # Whether to save MTCNN-aligned face crops
+  save_aligned: true
+
+actor_recognition:
+  model: inception_resnet_v1
+  pretrained: vggface2
+  batch_size: 64
+  l2_normalize: true
+  # HDBSCAN clustering over all face embeddings to derive actor IDs.
+  clustering:
+    algorithm: hdbscan
+    min_cluster_size: 2
+    min_samples: 2
+    # 0.15-0.2 is ideal for cosine distance face embeddings.
+    cluster_selection_epsilon: 0.15
+
+scene_encoding:
+  model_name: openai/clip-vit-base-patch32
+  frame_source: keyframes   # 'keyframes' | 'sampled' | 'both'
+  batch_size: 16
+  location_candidates:
+    - park
+    - living room
+    - bedroom
+    - kitchen
+    - office
+    - street
+    - restaurant
+    - car interior
+    - hallway
+    - rooftop
+    - beach
+    - forest
+    - hospital
+    - school
+    - courtyard
+    - garden
+    - parking lot
+    - warehouse
+    - bar
+    - studio
+
+actor_embedding_size: 512
+scene_embedding_size: 768
+shot_embedding_size: 1024
+
+device:
+  prefer_mps: true
+
+clustering:
+  algorithm: hdbscan
+  min_cluster_size: 2
+  min_samples: 1
